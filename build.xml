@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project name="jnode" default="war" basedir=".">
+	<property name="build" value="build" />
+	<property name="classes" value="build/classes" />
+	<property name="lib" value="WebContent/WEB-INF/lib" />
+
+	<path id="lib-path">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${classes}" />
+		<javac srcdir="src" destdir="${classes}" includeantruntime="on">
+			<classpath refid="lib-path" />
+		</javac>
+		<copy todir="${classes}">
+			<fileset dir="resources">
+				<include name="*.*" />
+				<exclude name="*-test.*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="war" depends="compile">
+		<war destfile="${build}/ROOT.war">
+			<fileset dir="WebContent">
+				<exclude name="assets/assets-*.css" />
+				<exclude name="assets/assets-*.js" />
+				<exclude name="META-INF/**" />
+				<exclude name="WEB-INF/classes/**" />
+				<exclude name="WEB-INF/jetx_classes/**" />
+			</fileset>
+			<lib dir="${lib}" />
+			<classes dir="${classes}" />
+		</war>
+		<delete dir="${classes}" />
+	</target>
+</project>

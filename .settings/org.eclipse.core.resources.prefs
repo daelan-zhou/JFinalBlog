@@ -1,0 +1,18 @@
+#Thu Oct 23 09:04:57 CST 2014
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/templates/error/404.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/error/500.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/about.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/blog.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/index.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/layout.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/life/html5.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/life/index.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/web/life/itunes.vm=UTF-8
+encoding//WebContent/WEB-INF/templates/xml/rss.vm=UTF-8
+encoding//WebContent/ueditor/dialogs/attachment/attachment.html=UTF-8
+encoding//WebContent/ueditor/dialogs/image/image.html=UTF-8
+encoding//WebContent/ueditor/dialogs/link/link.html=UTF-8
+encoding//WebContent/ueditor/dialogs/map/map.html=UTF-8
+encoding//WebContent/ueditor/dialogs/wordimage/wordimage.html=UTF-8
+encoding/<project>=UTF-8

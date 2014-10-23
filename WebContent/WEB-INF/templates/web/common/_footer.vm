@@ -1,0 +1,61 @@
+#define(Options options)
+<footer>
+    <div class="container">
+        <div class="footer-widgets">
+            <div class="f-widget f-widget-1">
+                <div class="widget">
+                    <h3>网站相关</h3>
+                    <ul>
+                        <li>
+                            <a title="Rss 订阅" target="_blank" href="${BASE_PATH }rss.xml">Rss 订阅</a>
+                        </li>
+                        <li>
+                            <a title="Git地址" target="_blank" rel="nofollow" href="${options.get('git_url')}">本站源码</a>
+                        </li>
+                        <li>
+                            <a title="新浪微博" target="_blank" rel="nofollow" href="${options.get('wb_sina')}">新浪微博</a>
+                        </li>
+                        <li>
+                            <a title="腾讯微博" target="_blank" rel="nofollow" href="${options.get('wb_qq')}">腾讯微博</a>
+                        </li>
+                    </ul>
+                    QQ : <a target="_blank" rel="nofollow" href="http://wpa.qq.com/msgrd?v=3&amp;uin=357112618&amp;site=qq&amp;menu=yes">357112618</a>
+                </div>
+            </div>
+            <div class="f-widget f-widget-2">
+                <div class="widget">
+                    <h3>热门标签</h3>
+                    <div class="tagcloud">
+                        #for (Tags item : hostTags())
+                            <a title="${item.get('tag_name')}" href="${BASE_PATH }tags/${item.get('tag_name')}">
+                                ${item.get('tag_name')}
+                                <span style="color:tan;">&nbsp;${item.get('num')}</span>
+                            </a>
+                        #end
+                    </div>
+                </div>
+            </div>
+            <div class="f-widget last">
+                <div class="widget">
+                    <h3>官方微信</h3><img height="120" alt="DreamLu官方微信" width="120" src="${options.get('cdn_path')}/images/weixin.jpg?v=v1.1.1">
+                </div>
+            </div>
+        </div><!--.footer-widgets-->
+    </div>
+    <div class="copyrights">
+        <div id="copyright-note" class="row">
+            <span>© 2014&nbsp;
+            <!--<a title="Google+" target="_blank" rel="nofollow" href="${options.get('google')}">${options.get('site_name')}</a></span>
+            <!--<span><a title="备案号" target="_blank" rel="nofollow" href="http://www.miitbeian.gov.cn/">京ICP备${options.get('record_number')}号</a></span>-->
+            	友情链接：
+            <span>
+                #for (Links item : friendLinks())
+                    <a title="${item.get('title')}" target="_blank" href="${item.get('url')}">${item.get('title')}</a>
+                #end
+            </span>
+            <a style="float: right;" rel="nofollow license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">
+                <img height="0" style="border-width:0;vertical-align: middle;" alt="知识共享许可协议" width="0" src="${options.get('cdn_path')}/images/licenses.png">
+            </a>
+        </div>
+    </div><!--end copyrights-->
+</footer>

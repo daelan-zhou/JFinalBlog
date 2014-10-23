@@ -1,0 +1,35 @@
+#define(Options options)
+<header class="main-header">
+    <div class="container">
+        <div id="header">
+            <h1 id="logo">
+                <a href="${BASE_PATH }"><span>I</span>kkong</a>
+            </h1>
+            <!-- END #logo-->
+            <div class="widget-header">
+                <div class="banner">
+                    <div class="textwidget">
+                        <img width="728" height="70" alt="${options.get('site_name')}" src="${options.get('cdn_path')}/images/banner.png?v=${options.get('site_version')}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #header-->
+        <div class="secondary-navigation">
+            <nav id="navigation">
+                <ul id="menu-main-navigation" class="menu sf-js-enabled">
+                    <li id="menu-item-1305" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1305"><a href="${BASE_PATH }">首页</a></li>
+                    <li id="menu-item-1286" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1286"><a href="${BASE_PATH }blogs">原创 • 文章</a></li>
+                    <li id="menu-item-1287" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1287"><a href="${BASE_PATH }favorites">收藏 • 文章</a></li>
+                    <li id="menu-item-1298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a class="sf-with-ul">生活 • 娱乐</a>
+                        <ul class="sub-menu sf-js-enabled">
+                            <li id="menu-item-1303" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1303"><a href="${BASE_PATH }life/itunes">itunes排行</a></li>
+                            <li id="menu-item-1301" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1301"><a href="${BASE_PATH }life/html5">html5游戏</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-1290" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1290"><a href="${BASE_PATH }about">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div><!-- .container-->
+</header>

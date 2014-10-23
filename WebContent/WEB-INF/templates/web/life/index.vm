@@ -1,0 +1,28 @@
+#tag block("meta")
+    <title>身边团购 - JFinal,nodejs博客dreamlu.net</title>
+    <meta name="Keywords" content="团购,微信团购,附近团购,大众点评api"/>
+    
+#end
+
+#tag block("content")
+    <article class="ss-full-width">
+        <div id="content_box">
+            <div id="content" class="hfeed">
+                <div id="post-200" class="post-200 page type-page status-publish hentry g post has_thumb">
+                    <header>
+                        <h1 class="title">身边团购</h1>
+                    </header>
+                    <div class="post-content box mark-links">
+                        <table>
+                            <thead></thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+#end
+
+#include ("../layout.vm")

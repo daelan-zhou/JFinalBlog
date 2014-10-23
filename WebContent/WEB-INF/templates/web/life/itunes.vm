@@ -1,0 +1,99 @@
+#define(Options options)
+
+#tag block("meta")
+    <title>iTunes App排行榜 - JFinal,nodejs博客dreamlu.net</title>
+    <meta name="Keywords" content="最新iTunes排行榜,ios游戏,iphone游戏排行,ipad免费app排行榜"/>
+    
+#end
+
+#tag block("content")
+    <article class="ss-full-width">
+        <div id="content_box">
+            <div id="content" class="hfeed">
+                <div id="post-200" class="post-200 page type-page status-publish hentry g post has_thumb">
+                    <header>
+                        <h1 class="title">iTunes App排行榜</h1>
+                    </header>
+                    <div class="post-content box mark-links">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="15%">
+                                    <select class="state">
+                                        <option value="cn" selected="selected">中国</option>
+                                        <option value="us">美国</option>
+                                        <option value="hk">香港</option>
+                                        <option value="tw">台湾</option>
+                                        <option value="jp">日本</option>
+                                    </select></th>
+                                    <th width="20%">
+                                    <select class="count">
+                                        <option value="10" selected="selected">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="300">300</option>
+                                    </select></th>
+                                    <th width="55%">
+                                    <select class="type">
+                                        <option value="topfreeapplications" selected="selected">免费App排名</option>
+                                        <option value="toppaidapplications">收费 App排名</option>
+                                        <option value="topgrossingapplications">畅销 App排名</option>
+                                        <option value="topfreeipadapplications">免费 iPad App排名</option>
+                                        <option value="toppaidipadapplications">付费 iPad App排名</option>
+                                        <option value="topgrossingipadapplications">畅销 iPad App排名</option>
+                                        <option value="newapplications">新 App</option>
+                                        <option value="newfreeapplications">新的免费应用程序</option>
+                                        <option value="newpaidapplications">新的付费应用程序</option>
+                                    </select></th>
+                                    <th width="10%">
+                                    <select class="genre">
+                                        <option value="" selected="selected">所有类型</option>
+                                        <option value="6014">游戏</option>
+                                        <option value="6011">音乐</option>
+                                        <option value="6018">图书</option>
+                                        <option value="6016">娱乐</option>
+                                    </select></th>
+                                </tr>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>图标</th>
+                                    <th>名称</th>
+                                    <th>价格</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>更新时间：</th>
+                                    <th colspan="2"><span class="time"></span></th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+#end
+
+#tag block("script")
+    <script id="tableTemp" type="text/html">
+        <tr>
+            <th>{{id}}</th>
+            <th><img class="lazy" src="{{image}}" width="53" heigh="53" title="{{name}}"></th>
+            <th><a target="_blank" href="{{link}}" title="{{name}}">{{name}}</a></th>
+            <th>{{price}}</th>
+        </tr>
+    </script>
+    <script>
+        js.push('${options.get('cdn_path')}/js/artTemplate/js/template.min.js');
+        js.push('${options.get('cdn_path')}/js/artTemplate/js/template-syntax.js');
+        js.push('${options.get('cdn_path')}/js/moment/moment.min.js');
+        js.push('${options.get('cdn_path')}/js/moment/lang/zh-cn.js');
+        js.push('${options.get('cdn_path')}/js/itunes.js');
+    </script>
+#end
+
+#include ("../layout.vm")

@@ -1,0 +1,87 @@
+#define(Options options, WxRule wxRule)
+#if(wxRule.get('id'))
+    #set(String tab = '修改规则')
+#else
+    #set(String tab = '添加规则')
+#end
+
+#tag block("meta")
+    <style>
+        .emotions{position:absolute;top:30px;left:20px;border:1px solid #AAA;padding:5px;background-color:#FFF;z-index:9999999;display:none}
+        .emotions table td{padding:1px;}
+        .emotions table td div{background: url("https://res.mail.qq.com/zh_CN//images/mo/DEFAULT2/default.gif") no-repeat 0 0 scroll transparent;width:24px;height:24px;cursor:pointer; border:1px solid #dfe6f6;}
+        .emotions table div:hover{border:1px solid blue;}
+        .emotions .emotionsGif{position:absolute;top:-1px;left:430px;border:1px solid #AAA;padding:20px;background-color:#FFF;text-align:center;width:24px;height:24px}
+    </style>
+#end
+        
+#tag block("content")
+    #include ("../common/_admin_navbar.vm", {"wechatClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">${tab}</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="/admin">首页</a><span class="divider">/</span>
+            </li>
+            <li class="active">${tab}</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <form action="/admin/wechat/save_update" method="post">
+                    <input type="hidden" name="wxRule.id" value="${wxRule.get('id')}"/>
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon-save"> </i>&nbsp;保存
+                        </button><a href="/admin/wechat" class="btn">返回</a>
+                        <div class="btn-group"></div>
+                    </div>
+                    <div class="well">
+                        <div id="myTabContent" class="tab-content">
+                            <label>规则</label>
+                            <input type="text" name="wxRule.rule" value="${wxRule.get('rule')}" required="required" class="input-xlarge"/>
+                            <label>回复<span> <a href="javascript:;" inputid="rule" class="iconEmotion"><i class="icon-hand-right"></i>表情</a></span></label>
+                            <textarea id="rule" name="wxRule.reply" style="width: 700px; height: 200px;">${wxRule.get('reply')}</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            #include ("../common/_admin_footer.vm")
+        </div>
+    </div>
+    <div class="emotions"></div>
+#end
+
+#tag block("script")
+    <script type="text/javascript">
+        $(function(){
+            $('form').submit(function(){
+                var dialog = $.dialog();
+                var rule = $('input[name="wxRule.rule"]').val();
+                var reply = $('textarea[name="wxRule.reply"]').val();
+                if( rule.length < 1 ){
+                    dialog.content('标题太短！').time(1000);
+                    return false;
+                }
+                if( reply.length < 1 ){
+                    dialog.content('亲再多些点吧！').time(1000);
+                    return false;
+                }
+                _post(this, dialog, function(data){
+                    if(data.status){
+                        dialog.content('保存成功！').lock().time(1000);
+                        setTimeout(function(){
+                            location.href = '/admin/wechat';
+                        }, 1500);
+                    }else{
+                        dialog.content('服务器忙，请稍候！').lock().time(2000);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+#end
+
+#include ("../layout.vm")

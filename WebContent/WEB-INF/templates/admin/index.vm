@@ -1,0 +1,100 @@
+#define(Options options)
+
+#tag block("content")
+    #include ("common/_admin_navbar.vm", {"dashboardClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">博文热度</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li class="active">首页</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="well">
+                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+            #include ("common/_admin_footer.vm")
+        </div>
+    </div>
+#end
+
+#tag block("script")
+    <script src="${options.get('cdn_path')}/js/highcharts/highcharts.js"></script>
+    <script src="${options.get('cdn_path')}/js/highcharts/modules/exporting.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'scatter',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: '博文热度图'
+                },
+                subtitle: {
+                    text: "${options.get('site_url')}",
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    title: {
+                        enabled: true,
+                        text: '博文id'
+                    },
+                    startOnTick: true,
+                    endOnTick: true,
+                    showLastLabel: true
+                },
+                yAxis: {
+                    title: {
+                        text: '阅读数 （次）'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 100,
+                    y: 70,
+                    floating: true,
+                    backgroundColor: '#FFFFFF',
+                    borderWidth: 1
+                },
+                plotOptions: {
+                    scatter: {
+                        marker: {
+                            radius: 5,
+                            states: {
+                                hover: {
+                                    enabled: true,
+                                    lineColor: 'rgb(100,100,100)'
+                                }
+                            }
+                        },
+                        states: {
+                            hover: {
+                                marker: {
+                                    enabled: false
+                                }
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<b>{series.name}</b><br>',
+                            pointFormat: 'ID:{point.x}, {point.y} 次'
+                        }
+                    }
+                },
+                series: [{
+                    name: '统计',
+                    color: 'rgba(223, 83, 83, .5)',
+                    data: $.parseJSON('${data}')
+                }]
+            });
+        });
+    </script>
+#end
+
+#include ("layout.vm")

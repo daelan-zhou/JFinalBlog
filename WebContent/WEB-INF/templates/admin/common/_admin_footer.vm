@@ -1,0 +1,11 @@
+#define(Options options)
+<footer>
+    <hr/>
+    <p class="pull-right">
+        GitHub <a href="${options.get('git_url')}" target="_blank">${options.get('site_name')}</a>by 
+        <a href="${options.get('git_url')}" target="_blank">${options.get('site_name')}</a>
+    </p>
+    <p>
+        © 2013 <a href="${options.get('git_url')}" target="_blank">${options.get('site_name')}</a>
+    </p>
+</footer>

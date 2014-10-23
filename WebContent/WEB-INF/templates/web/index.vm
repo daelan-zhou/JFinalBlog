@@ -1,0 +1,37 @@
+#define(Options options, Page blogPage)
+
+#tag block("meta")
+    <title>空空,空空丶,ikkong,程序员,软件工程师,空空的博客</title>
+    <meta content="ikkong,jfinal,开源博客" name="Keywords">
+    <meta content="空空（ikkong）的个人网站。一名后端开发工程师，并有志成为一名优秀的架构师！" name="Description">
+#end
+
+#tag block("content")
+    <article class="article">
+        <div id="content_box" class="home_page">
+            #if(postsby)
+                <h1 class="postsby">
+                    <span>${postsby}</span>
+                </h1>
+            #end
+            #include ("common/_posts.vm")
+            #include ("common/_pagination.vm", {urlParas :  ""})
+        </div>
+    </article>
+    <aside class="sidebar c-4-12">
+        <div id="sidebars" class="g">
+            <div class="sidebar">
+                #include ("common/_sidebar.vm")
+            </div>
+        </div>
+    </aside>
+#end
+
+#tag block("script")
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"${options.get('duoshuo_domain')}"};
+        js.push('http://static.duoshuo.com/embed.js');
+    </script>
+#end
+
+#include ("layout.vm")

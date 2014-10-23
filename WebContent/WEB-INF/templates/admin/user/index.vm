@@ -1,0 +1,97 @@
+#define(Options options, User userInfo)
+
+#tag block("content")
+    #include ("../common/_admin_navbar.vm", {"accountsClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">用户管理</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="/admin">首页</a>
+                <span class="divider">/</span>
+            </li>
+            <li class="active">用户管理</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="btn-toolbar">
+                    <button class="btn btn-primary info_btn">
+                        <i class="icon-save"></i>&nbsp;保存
+                    </button>
+                    <a href="/admin/blog/list" class="btn">返回</a>
+                    <div class="btn-group"></div>
+                </div>
+                <div class="well">
+                    <div id="myTabContent" class="tab-content">
+                        <div id="info" class="tab-pane active">
+                            <form id="info_btn" action="/admin/user/update" method="post">
+                                <img src="${userInfo.get('head_photo')}" style="float: right;border-radius: 50%;margin-right: 50%;"/>
+                                <label>昵称</label>
+                                <input type="text" name="user.nick_name" value="${userInfo.get('nick_name')}" required="required" class="input-xlarge"/>
+                                <label>性别</label>
+                                <div style="margin-bottom: 8px;">
+                                    <label class="checkbox inline">
+                                        #if(userInfo.get('sex') == 0)
+                                            <input type="radio" name="user.sex" value="0" checked />女
+                                        #else
+                                            <input type="radio" name="user.sex" value="0" />女
+                                        #end
+                                    </label>
+                                    <label class="checkbox inline">
+                                        #if(userInfo.get('sex') == 1)
+                                            <input type="radio" name="user.sex" value="1" checked />男
+                                        #else
+                                            <input type="radio" name="user.sex" value="1" />男
+                                        #end
+                                    </label>
+                                </div>
+                                <label>生日</label>
+                                <div class="input-append date form_datetime">
+                                    <input type="text" name="user.birthday" value="${userInfo.get('birthday')}" readonly="readonly" class="input-xlarge"/>
+                                    <span class="add-on">
+                                        <i class="icon-th"></i>
+                                    </span>
+                                </div></div>
+                                <label>博客（微博）链接</label>
+                                <input type="text" name="user.url" value="${userInfo.get('url')}" class="input-xlarge"/>
+                                <label>个性签名</label>
+                                <textarea name="user.signature" rows="3" cols="20" style="width: 500px; height: 100px;">${userInfo.get('signature')}</textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                #include ("../common/_admin_footer.vm")
+            </div>
+        </div>
+    </div>
+#end
+
+#tag block("script")
+    <script type="text/javascript">
+        $(function(){
+            $('.form_datetime').datetimepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                todayBtn: true,
+                pickerPosition: "bottom-left"
+            });
+            $('.info_btn').click(function(){
+                var dialog = $.dialog();
+                _post('#info_btn', dialog, function(data){
+                    if(data.status){
+                        dialog.content('保存成功！').lock().time(1000);
+                        setTimeout(function(){
+                            location.href = '/admin/user';
+                        }, 1500);
+                    }else{
+                        dialog.content('服务器忙，请稍候！').time(2000);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+#end
+
+#include ("../layout.vm")

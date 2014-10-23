@@ -1,0 +1,35 @@
+## db local
+db.jdbcUrl = jdbc:mysql://localhost:3306/IkkongBlog?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+db.user = root
+db.password = 1234
+
+isdev = true
+
+## cookie
+secret = aa78c11d2a05698387dbeea4dd55fd9f
+domain = .ikkong.com
+## watermark, wechat use
+domain.name = www.ikkong.com
+
+## https://portal.qiniu.com/signup?code=3lhz6lzh2821d
+gravatar.url = 
+
+## qiniu bcs [url]https://portal.qiniu.com/signup?code=3lhz6lzh2821d
+qiniu.bucket = dreamlu
+qiniu.access.key = 
+qiniu.secret.key = 
+
+# mail config
+mail.smtp.host = smtp.ym.163.com
+mail.smtp.auth = true
+mail.smtp.port = 25
+mail.stmp.debug = false
+mail.stmp.timeout = 2000
+mail.stmp.username = no-reply@dreamlu.net
+mail.stmp.pwd = 
+mail.stmp.title = 
+
+# git hook
+git.pwd  = 
+sh.build = 
+sh.mail  = 

@@ -1,0 +1,75 @@
+#define(Options options)
+
+#tag block("meta")
+    <style>
+        .dataTables_length select { width: 80px;}
+        .fg-toolbar { height: 30px;}
+    </style>
+#end
+
+#tag block("content")
+    #include ("../common/_admin_navbar.vm", {"optionsClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">网站设置</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="/admin">首页</a><span class="divider">/</span>
+            </li>
+            <li class="active">网站设置</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="btn-toolbar">
+                    <a href="/admin/links/add_edit" class="btn btn-primary"><i class="icon-plus"></i>添加</a>
+                    <div class="btn-group"></div>
+                </div>
+                <div class="well">
+                    <table id="otable" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="5%">id</th>
+                                <th width="10%">分类</th>
+                                <th width="15%">网站</th>
+                                <th width="10%">图标</th>
+                                <th width="10%">排序</th>
+                                <th width="10%">状态</th>
+                                <th width="15%">时间</th>
+                                <th width="15%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            #include ("../common/_admin_footer.vm")
+        </div>
+    </div>
+#end
+
+#tag block("script")
+    <script id="titleTemp" type="text/html">
+        <a title="<%=title%>" target="_blank" href="<%=url%>"><%=title%></a>
+        </script>
+    <script id="statusTemp" type="text/html">
+        <% if (status == '0') { %>
+        <span class="badge badge-success">正常</span>
+        <% } else if ( status == '1' ) { %>
+        <span class="badge badge-warning">已删</span>
+        <% } %>
+    </script>
+    <script id="manageTemp" type="text/html">
+        <a href="/admin/links/add_edit/<%=id%>" style="margin-right: 8px;"><i class="icon-pencil"></i>编辑</a>
+        <a href="/admin/links/delete_show/<%=id%>" class="delete_show">
+        <% if (status == '0') { %>
+        <i class="icon-remove"></i>删除
+        <% } else if ( status == '1' ) { %>
+        <i class="icon-ok"></i>显示
+        <% } %>
+        </a>
+    </script>
+    <script type="text/javascript" src="${options.get('cdn_path')}/js/admin/links_list.js"></script>
+#end
+
+#include ("../layout.vm")

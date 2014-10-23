@@ -1,0 +1,107 @@
+#define(Options options, User user)
+
+#set(String dashboardClasses = '')
+#set(String accountsClasses = '')
+#set(String tagsClasses = '')
+#set(String wechatClasses = '')
+#set(String legalClasses = '')
+#set(String optionsClasses = '')
+
+#if(dashboardClass)
+    #set(dashboardClasses = 'in')
+#end
+#if(accountsClass)
+    #set(accountsClasses = 'in')
+#end
+#if(tagsClass)
+    #set(tagsClasses = 'in')
+#end
+#if(wechatClass)
+    #set(wechatClasses = 'in')
+#end
+#if(legalClass)
+    #set(legalClasses = 'in')
+#end
+#if(optionsClass)
+    #set(optionsClasses = 'in')
+#end
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav pull-right">
+            <li id="fat-menu" class="dropdown">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i>
+                    ${user.get('nick_name') }
+                    <i class="icon-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a tabindex="-1" href="${BASE_PATH }admin/user">用户中心</a></li>
+                    <li class="divider"></li><li class="divider visible-phone"></li>
+                    <li><a tabindex="-1" href="${BASE_PATH }logout">退出</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a class="brand" href="${BASE_PATH }">
+            <span class="first">${options.get('site_name')}</span>
+        </a>
+    </div>
+</div>
+<div class="sidebar-nav">
+    <a href="#dashboard-menu" data-toggle="collapse" style="margin-top: .4em;" class="nav-header">
+        <i class="icon-file"></i>博文管理
+    </a>
+    <ul id="dashboard-menu" class="nav nav-list collapse ${dashboardClasses}">
+        <li>
+            <a href="${BASE_PATH }admin">首页</a>
+        </li>
+        <li>
+            <a href="${BASE_PATH }admin/blog">列表</a>
+        </li>
+    </ul>
+    <a href="#accounts-menu" data-toggle="collapse" class="nav-header">
+        <i class="icon-user"></i>用户管理
+        <span class="label label-info">+3</span>
+    </a>
+    <ul id="accounts-menu" class="nav nav-list collapse ${accountsClasses}">
+        <li>
+            <a href="${BASE_PATH }admin/user">用户中心</a>
+        </li>
+        <li>
+            <a href="${BASE_PATH }admin/user/list">用户列表</a>
+        </li>
+    </ul>
+    <a href="#tags-menu" data-toggle="collapse" class="nav-header">
+        <i class="icon-tags"></i>标签管理
+        <i class="icon-chevron-up"></i>
+    </a>
+    <ul id="tags-menu" class="nav nav-list collapse ${tagsClasses}">
+        <li>
+            <a href="${BASE_PATH }admin/tags">标签列表</a>
+        </li>
+    </ul>
+    <a href="#wechat-menu" data-toggle="collapse" class="nav-header">
+        <i class="icon-comment"></i>微信管理
+        <i class="icon-chevron-up"></i>
+    </a>
+    <ul id="wechat-menu" class="nav nav-list collapse ${wechatClasses}">
+        <li>
+            <a href="${BASE_PATH }admin/wechat">规则列表</a>
+        </li>
+        <li>
+            <a href="${BASE_PATH }admin/wechat/leave_msgs">留言列表</a>
+        </li>
+    </ul>
+    <a href="#options-menu" data-toggle="collapse" class="nav-header">
+        <i class="icon-cog"></i>网站设置
+        <i class="icon-chevron-up"></i>
+    </a>
+    <ul id="options-menu" class="nav nav-list collapse ${optionsClasses}">
+        <li>
+            <a href="${BASE_PATH }admin/options">网站信息</a>
+        </li>
+        <li>
+            <a href="${BASE_PATH }admin/links">友链管理</a>
+        </li>
+    </ul>
+</div>

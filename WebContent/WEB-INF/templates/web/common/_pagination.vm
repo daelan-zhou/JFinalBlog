@@ -1,0 +1,70 @@
+#define(Page blogPage)
+#set(currentPage = blogPage.pageNumber)
+#set(totalPage = blogPage.totalPage)
+
+#if(totalPage <= 0 || currentPage > totalPage)
+    #stop
+#end
+#set(int startPage = currentPage - 2)
+
+#if(startPage < 1) 
+    #set(startPage = 1)
+#end
+#set(endPage = currentPage + 2)
+
+#if(endPage > totalPage)
+    #set(endPage = totalPage)
+#end
+<div class="pagination">
+    <ul>
+        #if(currentPage <= 4)
+            #set(startPage = 1)
+        #end
+        #if((totalPage - currentPage) < 4)
+            #set(endPage = totalPage)
+        #end
+        #if(currentPage == 1)
+            <li>
+                <span class="currenttext">&larr; 上一页</span>
+            </li>
+        #else
+            <li>
+                <a href="${actionUrl}${currentPage - 1}${urlParas}" class="prev_page">&larr; 上一页</a>
+            </li>
+        #end
+        #if(currentPage > 4)
+            <li>
+                <a href="${actionUrl}1${urlParas}">1</a>
+            </li>
+            <li>
+                <span class="currenttext">…</span>
+            </li>
+        #end
+        #for(int i : iterator(startPage,endPage))
+            <li>
+                #if(currentPage == for.index)
+                    <span class="currenttext">${i}</span>
+                #else
+                    <a href="${actionUrl}${i}${urlParas}">${i}</a>
+                #end
+            </li>
+        #end
+        #if((totalPage - currentPage) >= 4)
+            <li>
+                <span class="currenttext">…</span>
+            </li>
+            <li>
+                <a href="${actionUrl}${totalPage}${urlParas}">${totalPage}</a>
+            </li>
+        #end
+        #if(currentPage == totalPage)
+            <li>
+                <span class="currenttext">下一页 &rarr;</span>
+            </li>
+        #else
+            <li>
+                <a href="${actionUrl}${currentPage + 1}${urlParas}">下一页 &rarr;</a>
+            </li>
+        #end
+    </ul>
+</div>

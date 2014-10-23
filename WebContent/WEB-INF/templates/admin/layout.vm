@@ -1,0 +1,32 @@
+#define(Options options)
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>${options.get('site_name')}管理后台</title>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <link rel="stylesheet" type="text/css" href="${options.get('cdn_path')}${combo('/assets/assets-admin.jcss')}"/>
+        <link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/3.2.1/css/font-awesome.min.css"/>
+        <!--[if lt IE 9]>
+        <script src="http://cdn.staticfile.org/html5shiv/3.7/html5shiv.min.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/3.2.1/css/font-awesome-ie7.min.css"/>
+        <![endif]-->
+        ${meta}
+    </head>
+    <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+    <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+    <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+    <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <body class="">
+    <!--<![endif]-->
+        ${content}
+    </body>
+    <script type="text/javascript" src="${options.get('cdn_path')}${combo('/assets/assets-admin.jjs')}"></script>
+    <script type="text/javascript" src="${options.get('cdn_path')}/js/admin/admin.js"></script>
+    ${script}
+</html>

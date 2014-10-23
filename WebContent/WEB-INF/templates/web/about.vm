@@ -1,0 +1,46 @@
+#tag block("meta")
+    <title>空空,空空丶,ikkong,程序员,软件工程师,空空的博客</title>
+    <meta content="ikkong,jfinal,开源博客" name="Keywords">
+    <meta content="空空（ikkong）的个人网站。一名后端开发工程师，并有志成为一名优秀的架构师！" name="Description">
+#end
+
+#tag block("content")
+    <article class="ss-full-width">
+        <div id="content_box">
+            <div id="content" class="hfeed">
+                
+                <h3>关于我</h3>
+                <p>IT界小小程序员一名，87年出生于江苏如皋，93年入学，07年大学毕业，偶与软件结缘，从此踏上"码农之旅"。现就职于常州某软件公司，从事Android/.NET开发工作。
+        爱生活，爱技术，爱民族音乐，更爱亲爱的老婆。相信IT人可以改变世界，并愿意为之努力！</p>
+                <hr/>
+                <h3>愿望</h3>
+                <p>安得广厦千万间，大庇天下程序缘。</p>
+                <hr/>
+                <h3>掌握</h3>
+                <p>
+                    <code>JAVA</code>
+                    <code>C#</code>
+                    <code>Android</code>
+                    <code>MySQL</code>
+                    <code>MSSQL</code>
+                </p>
+                <hr/>
+                <!--<h3>时间线</h3>
+                <ul>
+                    <li>
+                        2011.11 ～ 2013.03 AA
+                    </li>
+                    <li>
+                        2013.04 ～ 2014.05 BB
+                    </li>
+                    <li>
+                        2014.05 ～  至今  CC
+                    </li>
+                </ul>
+                -->
+            </div>
+        </div>
+    </article>
+#end
+
+#include ("layout.vm")

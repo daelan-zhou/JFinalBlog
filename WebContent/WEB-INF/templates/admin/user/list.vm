@@ -1,0 +1,73 @@
+#define(Options options)
+
+#tag block("meta")
+    <style>
+        .dataTables_length select { width: 80px;}
+        .fg-toolbar { height: 30px;}
+    </style>
+#end
+
+#tag block("content")
+    #include ("../common/_admin_navbar.vm", {"accountsClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">用户管理</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="/admin">首页</a><span class="divider">/</span>
+            </li>
+            <li class="active">用户中心</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="well">
+                    <table id="otable" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="10%">id</th>
+                                <th width="10%">昵称</th>
+                                <th width="10%">性别</th>
+                                <th width="20%">博文数</th>
+                                <th width="10%">状态</th>
+                                <th width="20%">状态管理</th>
+                                <th width="20%">权限管理</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            #include ("../common/_admin_footer.vm")
+        </div>
+    </div>
+#end
+                
+#tag block("script")
+    <script id="statusTemp" type="text/html">
+        <% if (status == '0') { %>
+        <span class="badge badge-success">正常</span>
+        <% } else if ( status == '1' ) { %>
+        <span class="badge badge-warning">已删</span>
+        <% } %>
+    </script>
+    <script id="manageTemp" type="text/html">
+        <a href="/admin/user/update_status/<%=id%>" class="update_status">
+        <% if (status == '0') { %>
+        <i class="icon-remove"></i>删除
+        <% } else if ( status == '1' ) { %>
+        <i class="icon-ok"></i>显示
+        <% } %>
+        </a>
+    </script>
+    <script id="roleTemp" type="text/html">
+        <select class="update_role span6" data-url="/admin/user/update_role/<%=id%>">
+        <option value="0" <% if (role == '0') { %>selected<% } %> >普通</option>
+        <option value="1" <% if (role == '1') { %>selected<% } %> >VIP</option>
+        <option value="2" <% if (role == '2') { %>selected<% } %> >管理员</option>
+        <select>
+    </script>
+    <script type="text/javascript" src="${options.get('cdn_path')}/js/admin/user_list.js"></script>
+#end
+
+#include ("../layout.vm")

@@ -1,0 +1,35 @@
+#define(Page blogPage)
+#for (Blog item : blogPage.getList())
+    <div class="post excerpt">
+        <div class="post-date-ribbon">
+            <div class="corner"></div>${format(item.get('update_time')) }
+        </div>
+        <header>
+            <h2 class="title">
+                <a href="${BASE_PATH }blog/${item.get('id')}" rel="bookmark">${markKeywords(item.get('title').asString(), 50, keywords.asString())}</a>
+            </h2>
+            <div class="post-info">
+            <div class="author_mt hp_meta"><span class="mt_icon"></span>
+                #if(item.get('url'))
+                    <a href="${item.get('url')}" target="_blank" title="作者：${item.get('nick_name')}">${item.get('nick_name')}</a>
+                #else
+                    ${item.get('nick_name')}
+                #end
+            </div>
+            <div class="cat_mt hp_meta">${bTags(item.get('id').asInt())}</div>
+            <div class="time_mt hp_meta"><span class="time_icon"></span>${baseFormat(item.get('create_time')) }</div>
+            <div class="view_mt hp_meta"><span class="view_icon"> </span>${item.get('view_count')}</div>
+            <div class="comment_mt hp_meta">
+                <a href="${BASE_PATH }blog/${item.get('id')}#commentsAdd" title="评论数">
+                    <span class="mt_icon"></span>
+                    <span data-thread-key="${item.get('id')}" data-count-type="comments" class="ds-thread-count"></span>
+                </a>
+            </div>
+            </div>
+        </header>
+        <div class="post-content image-caption-format-1">${markKeywords(item.get('content').asString(), 497, keywords.asString())}</div>
+        <div class="readMore">
+            <a href="${BASE_PATH }blog/${item.get('id')}" title="${item.get('title')}" rel="more">阅读全部</a>
+        </div>
+    </div>
+#end

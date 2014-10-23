@@ -1,0 +1,17 @@
+#tag block("meta")
+    <title>空空,空空丶,ikkong,程序员,软件工程师,空空的博客</title>
+    <meta content="ikkong,jfinal,开源博客" name="Keywords">
+    <meta content="空空（ikkong）的个人网站。一名后端开发工程师，并有志成为一名优秀的架构师！" name="Description">
+#end
+
+#tag block("content")
+<article class="ss-full-width">
+    <div id="content_box">
+        <div id="content" class="hfeed">
+            TODO 待完善
+        </div>
+    </div>
+</article>
+#end
+
+#include ("../layout.vm")

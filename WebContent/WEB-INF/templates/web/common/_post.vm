@@ -1,0 +1,83 @@
+#define(Options options, Blog blog)
+<article class="article">
+    <div id="content_box">
+        <div id="post-356" class="post-356 post type-post status-publish format-standard hentry category-featured category-wellhead tag-social-media-2 g post cat-32-id cat-80-id has_thumb">
+            <div class="single_post">
+                <div class="post-date-ribbon">
+                    <div class="corner"></div>${format(blog.get('update_time')) }
+                </div>
+                <div class="breadcrumb">
+                    <a href="${BASE_PATH }" rel="nofollow">首页</a>&nbsp;&nbsp;»&nbsp;&nbsp;
+                    <a href="${BASE_PATH }${typeUrl}" title="${typeName}">${typeName}</a>&nbsp;&nbsp;»&nbsp;&nbsp; ${blog.get('title')}
+                </div>
+                <header>
+                    <h1 class="title single-title">${blog.get('title')}</h1>
+                        <span class="theauthor single-postmeta">
+                            <div class="author_mt hp_meta">
+                                <span class="mt_icon"></span>
+                                #if (blog.get('url'))
+                                    <a href="${blog.get('url')}" target="_blank" title="作者：${blog.get('nick_name')}">$!{blog.get('nick_name').asString()}</a>
+                                #else
+                                    ${blog.get('nick_name').asString()}
+                                #end
+                            </div>
+                        <div class="cat_mt hp_meta">${tags}</div>
+                        <div class="time_mt hp_meta">
+                            <span class="time_icon"> </span>${baseFormat(blog.get('create_time')) }
+                        </div>
+                        <div class="view_mt hp_meta">
+                            <span class="view_icon"> </span>${blog.get('view_count')}
+                        </div>
+                        <div class="comment_mt hp_meta">
+                            <a href="#commentsAdd" title="评论数">
+                                <span class="mt_icon"></span>
+                                <span data-thread-key="${blog.get('id')}" data-count-type="comments" class="ds-thread-count"></span>
+                            </a>
+                        </div>
+                    </span>
+                </header>
+                <!-- .headline_area-->
+                <div class="post-single-content box mark-links">${blog.get('content')}</div>
+            </div>
+            <div class="lcm_share">
+                <div id="bdshare" class="bdsharebuttonbox">
+                    <a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a>
+                    <a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a>
+                    <a href="#" data-cmd="bdhome" title="分享到百度新首页" class="bds_bdhome"></a>
+                    <a href="#" data-cmd="douban" title="分享到豆瓣网" class="bds_douban"></a>
+                    <a href="#" data-cmd="tqq" title="分享到腾讯微博" class="bds_tqq"></a>
+                    <a href="#" data-cmd="renren" title="分享到人人网" class="bds_renren"></a>
+                    <a href="#" data-cmd="huaban" title="分享到花瓣" class="bds_huaban"></a>
+                    <a href="#" data-cmd="tfh" title="分享到凤凰微博" class="bds_tfh"></a>
+                    <a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a>
+                    <a href="#" data-cmd="mail" title="分享到邮件分享" class="bds_mail"></a>
+                    <a href="#" data-cmd="more" class="bds_more"></a>
+                    <a data-cmd="count" class="bds_count"></a>
+                </div>
+            </div>
+            <div class="postauthor">
+                #if (blog.get('blog_type')  == 0)
+                    <h4>关于作者</h4>
+                    <img alt="${blog.get('nick_name')}" src="${blog.get('head_photo')}" height="80" width="80" style="border-radius: 40px;" class="avatar avatar-85 photo"/>
+                    <h5>
+                        #if (blog.get('url'))
+                            <a href="${blog.get('url')}" target="_blank" title="作者：${blog.get('nick_name')}">${blog.get('nick_name')}</a>
+                        #else
+                            ${blog.get('nick_name')}
+                        #end
+                    </h5>
+                    <p>${blog.get('signature')}</p>
+                #else
+                    <h4>原文地址：</h4><a href="${blog.get('share_url')}" target="_blank">${blog.get('share_url')}</a>
+                #end
+            </div>
+            <div class="related-posts">
+                <script type="text/javascript" id="wumiiRelatedItems"></script>
+            </div>
+        </div><!-- post-->
+        <div id="commentsAdd">
+            <!-- duoshuo  评论-->
+            <div data-thread-key="${blog.get('id')}" data-title="${blog.get('title')}" data-category="snode" data-author-key="${blog.get('user_id')}" class="ds-thread"></div>
+        </div>
+    </div>
+</article>

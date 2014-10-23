@@ -1,0 +1,150 @@
+#define(Options options, Blog blog)
+
+#if(blog.get('id'))
+    #set(String tab = '修改博文')
+#else
+    #set(String tab = '写博')
+#end
+#set(List types = [{'id': 0, 'type_name': '原创'}, {'id': 1, 'type_name': '收藏'}])
+
+#tag block("meta")
+    <style>
+        ul,li{list-style-type:none;}
+        span.tag{display:inline-block;background:#FFF;border:1px solid #e6e6e6;padding:0 8px;height:24px;line-height:24px;max-width:160px;overflow:hidden;color:#666;}
+        span.tag:hover{border-color:#BBB;color:#999;text-decoration:none;}
+        a.icon-remove{vertical-align:top;margin-left:4px;}
+        .attached{display:inline;}
+        #addtags{border-radius:3px;margin-left:5px;margin-bottom:8px;}
+    </style>
+#end
+
+#tag block("content")
+    #include ("../common/_admin_navbar.vm", {"dashboardClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">${tab}</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="/admin">首页</a><span class="divider">/</span>
+            </li>
+            <li class="active">${tab}</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <form action="/admin/blog/save_update" method="post">
+                    <input type="hidden" name="blog.id" value="${blog.get('id')}"/>
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon-save"> </i>&nbsp;保存
+                        </button><a href="/admin/blog/list" class="btn">返回</a>
+                        <div class="btn-group"></div>
+                    </div>
+                    <div class="well">
+                        <div id="myTabContent" class="tab-content">
+                            <label>标题</label>
+                            <input type="text" name="blog.title" value="${blog.get('title')}" required="required" class="input-xxlarge"/>
+                            <label>分类</label>
+                            <select id="DropDownTimezone" name="blog.blog_type" class="input-xlarge">
+                                #for(Map item : types)
+                                    #if(item.get('id') == blog.get('blog_type'))
+                                        <option value="${item.get('id')}" selected="selected">${item.get('type_name')}</option>
+                                    #else
+                                        <option value="${item.get('id')}">${item.get('type_name')}</option>
+                                    #end
+                                #end
+                            </select>
+                            <label>标签</label>
+                            <ul class="tag-list">
+                                #for(BlogTag item : tags)
+                                <li class="attached">
+                                    <span class="tag">${item.getStr('tag_name')}</span>
+                                    <a class="icon-remove" title="删除" href="#"></a>
+                                    <input name="tags" value="${item.get('id')}" type="hidden" />
+                                </li>
+                                #end
+                            </ul>
+                            <input id="autocomplete" type="text" class="input-xlarge"/>
+                            <a id="addtags" class="btn btn-primary"><i class="icon-tag"></i>添加标签</a>
+                            <label>来源</label>
+                            <input type="text" name="blog.share_url" value="${blog.get('share_url')}" class="input-xxlarge"/>
+                            <label>内容</label>
+                            <textarea id="editor" name="blog.content" class="input-xlarge">${blog.get('content')}</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            #include ("../common/_admin_footer.vm")
+        </div>
+    </div>
+#end
+
+#tag block("script")
+    <!-- ueditor-->
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${options.get('cdn_path')}/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // ueditor
+            var editor = UE.getEditor('editor');
+            // 标签处理
+            $('#autocomplete').autocomplete({
+                source:function(query, callback){
+                    var count = this.options.items;
+                    $.get("/admin/tags/all", {"query" : query, "count" : count}, function(data){
+                        return callback(data);
+                    });
+                },
+                formatItem:function(item){
+                    return item.tag_name;
+                },
+                setValue:function(item){
+                    return {'data-value': item.tag_name, 'data-id': item.id};
+                }
+            });
+            // 删除标签
+            $(document).on("click", ".icon-remove", function(e){
+                $(this).parents('.attached').remove();
+                return false;
+            })
+            // form 提交
+            $('form').submit(function(){
+                editor.sync()
+                var dialog = $.dialog();
+                var title = $('input[name="blog.title"]').val();
+                var content = $('#editor').val();
+                if( title.length < 3 ){
+                    dialog.content('标题太短！').time(1000);
+                    return false;
+                }
+                if( content.length < 10 ){
+                    dialog.content('亲再多些点吧！').time(1000);
+                    return false;
+                }
+                _post(this, dialog, function(data){
+                    if(data.status){
+                        dialog.content('保存成功！').lock().time(1000);
+                        setTimeout(function(){
+                            location.href = '/admin/blog/list';
+                        }, 1500);
+                    }else{
+                        dialog.content('服务器忙，请稍候！').lock().time(2000);
+                    }
+                });
+                return false;
+            });
+            $('#addtags').click(function(){
+                var tagname = $('#autocomplete').val();
+                $.post('/admin/tags/add_tags',{tagName: tagname}, function(data){
+                    if (data.status == 0) {
+                        $(".tag-list").append('<li class="attached"><span class="tag">' + tagname + '</span><a class="icon-remove" title="删除" href="#"></a><input name="tags" value="' + data.tagsid + '" type="hidden"></li>')
+                    } else {
+                        alert("该标签已经存在，不能重复添加！");
+                    }
+                });
+            });
+        });
+    </script>
+#end
+
+#include ("../layout.vm")

@@ -1,0 +1,52 @@
+#define(Options options)
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">    
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="${options.get('cdn_path')}/favicon.ico">
+        <meta content="width=device-width,user-scalable=no" name="viewport">
+        <meta content="IE=EmulateIE8" http-equiv="X-UA-Compatible">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="okapdtIdGB" name="baidu-site-verification">
+        <meta content="87ae82d9-c019-45d5-9f60-f46c407693b5" name="wumiiVerification">
+        <link rel="stylesheet" type="text/css" href="${options.get('cdn_path')}${combo('/assets/assets-web.jcss')}" media="all">
+        <!--[if lt IE 9]><script src="http://cdn.staticfile.org/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+        <link title="${options.get('site_name')} Rss订阅" rel="alternate" type="application/rss+xml" href="${BASE_PATH }rss.xml">
+        <!--
+        <script src="//hm.baidu.com/hm.js?545d179467376ca65cf577b4627616c9"></script>
+        <script type="text/javascript">
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?545d179467376ca65cf577b4627616c9";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+        --!>
+        ${meta}
+    </head>
+    <body id="blog" class="home blog main cat-32-id cat-80-id">
+        <!--[if lte IE 7]><div class="old-ie">您的浏览器版本<strong>很旧很旧</strong>，为了正常地访问网站，请升级您的浏览器 <a target="_blank" href="http://browsehappy.com">立即升级</a></div><![endif]-->
+        <div id="line"></div>
+        #include ("common/_header.vm")
+        <div class="main-container">
+            <div id="page">
+                <div class="content">${content}</div>
+            </div>
+        </div>
+        #include ("common/_footer.vm")
+    <script type="text/javascript" src="${options.get('cdn_path')}/js/lazyload-min.js"></script>
+    <script type="text/javascript">
+        var cdn_path = '${options.get('cdn_path')}'; // 供js中使用
+        var qrcode = '${qrcode}';
+        var js = [
+            "${options.get('cdn_path')}${combo('/assets/assets-web.jjs')}"
+        ];
+    </script>
+    ${script}
+    <script type="text/javascript">
+        LazyLoad.js(js);
+    </script>
+</html>

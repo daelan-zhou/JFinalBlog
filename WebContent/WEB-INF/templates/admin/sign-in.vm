@@ -1,0 +1,104 @@
+#define(Options options)
+
+#tag block("content")
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a href="${BASE_PATH }" class="brand">
+                <span class="first">${options.get('site_name')}</span>
+            </a>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="dialog">
+            <div class="block">
+                <!--<p class="block-heading">登录
+                    <a href="${BASE_PATH }/api/osc" title="开源中国快速登录" style="height: 34px;margin-right: 10px;" class="pull-right">
+                        <img src="${options.get('cdn_path')}/images/osc_s.png"/>
+                    </a>
+                    <a href="${BASE_PATH }/api/qq" title="qq快速登录" style="height: 34px;margin-right: 10px;" class="pull-right">
+                        <img src="${options.get('cdn_path')}/images/qq_s.png"/>
+                    </a>
+                    <a href="${BASE_PATH }/api/baidu" title="百度帐号登录" style="height: 34px;" class="pull-right">
+                        <img src="${options.get('cdn_path')}/images/login-baidu.png"/>
+                    </a>
+                    <a href="${BASE_PATH }/api/sina" title="新浪微博登陆" style="height: 34px;margin-right: 10px;" class="pull-right">
+                        <img src="${options.get('cdn_path')}/images/sina_b.png"/>
+                    </a>
+                </p>-->
+                <div class="block-body">
+                    <form action="${BASE_PATH }admin/session" method="post">
+                        <label>邮箱帐号：</label>
+                        <input type="email" name="email" required="required" original-title="请输入您的常用邮箱！" class="span12"/>
+                        <label>密码：</label>
+                        <input type="password" name="pwd" required="required" original-title="请输入您的密码！" class="span12"/>
+                        <input type="submit" value="登录" class="btn btn-primary pull-right"/>
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember" value="1" original-title="有效期一个月！"/>&nbsp;记住密码 
+                        </label>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <p class="pull-right">
+                <a href="#" class="forgot">忘了密码？</a>
+            </p>
+        </div>
+    </div>
+#end
+
+#tag block("script")
+    <script>
+        $(function() {
+            $('form').submit(function() {
+                var dia = $.dialog();
+                _post(this, dia, function(data) {
+                    if (data.status === 0) {
+                        dia.content('登录成功！').lock().time(1000);
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        dia.content('登录失败，请检查用户名和密码！').lock().time(2000);
+                    }
+                });
+                return false;
+            });
+            $('.forgot').click(function() {
+                var dialog = $.dialog({
+                    title : '请输入邮箱地址：',
+                    content : '<input id="reset-pwd" name="email" style="width:15em; padding:4px"/>',
+                    lock : true,
+                    ok : function() {
+                        var input = $('#reset-pwd');
+                        var email = $.trim(input.val());
+                        if (!/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(email)) {
+                            input.select();
+                            input.focus();
+                            return false;
+                        } else {
+                            var ajaxDialog = $.dialog({
+                                fixed : true,
+                                lock : true
+                            });
+                            $.post("${BASE_PATH }/reset_pwd", {
+                                email : email
+                            }, function(data) {
+                                if (data.status) {
+                                    ajaxDialog.title('邮件发送成功！');
+                                    ajaxDialog.content('请登录邮箱按指示完成密码重置操作！').lock().time(2000);
+                                } else {
+                                    ajaxDialog.title('提示！');
+                                    ajaxDialog.content('邮件发送失败，请稍后重试！').lock().time(2000);
+                                }
+                            });
+                        };
+                    },
+                    cancel : true
+                });
+                return false;
+            });
+        })
+    </script>
+#end
+
+#include ("layout.vm")

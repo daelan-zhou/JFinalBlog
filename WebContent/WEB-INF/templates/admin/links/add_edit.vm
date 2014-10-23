@@ -1,0 +1,92 @@
+#define(Options options, Links links)
+
+#if(links.get('id'))
+    #set(String tab = '修改')
+#else
+    #set(String tab = '添加')
+#end
+
+#set(List types = [{'id': 0, 'type_name': '友链'}, {'id': 1, 'type_name': '广告'}])
+
+#tag block("content")
+    #include ("../common/_admin_navbar.vm", {"optionsClass" : true})
+    <div class="content">
+        <div class="header">
+            <h1 class="page-title">${tab}</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="/admin">首页</a><span class="divider">/</span>
+            </li>
+            <li class="active">${tab}</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <form action="/admin/links/save_update" method="post">
+                    <input type="hidden" name="links.id" value="${links.get('id')}"/>
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon-save"> </i>&nbsp;保存
+                        </button><a href="/admin/links" class="btn">返回</a>
+                        <div class="btn-group"></div>
+                    </div>
+                    <div class="well">
+                        <div id="myTabContent" class="tab-content">
+                            <label>网站</label>
+                            <input type="text" name="links.title" value="${links.get('title')}" required="required" class="input-xlarge"/>
+                            <label>分类</label>
+                            <select id="DropDownTimezone" name="blog.blog_type" class="input-xlarge">
+                                 #for(Map item : types)
+                                    #if(item.get('id') == links.get('type'))
+                                        <option value="${item.id}" selected="selected">${item.get('type_name')}</option>
+                                    #else
+                                        <option value="${item.id}">${item.get('type_name')}</option>
+                                    #end
+                                #end
+                            </select>
+                            <label>地址</label>
+                            <input type="text" name="links.url" value="${links.get('url')}" class="input-xxlarge"/>
+                            <label>图标</label>
+                            <input type="text" name="links.img" value="${links.get('img')}" class="input-xxlarge"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        #include ("../common/_admin_footer.vm")
+        </div>
+    </div>
+#end
+
+#tag block("script")
+    <script type="text/javascript">
+        $(function(){
+            $('form').submit(function(){
+                var dialog = $.dialog();
+                var title = $('input[name="links.title"]').val();
+                var url   = $('input[name="links.url"]').val();
+                var img   = $('input[name="links.img"]').val();
+                if( title.length < 1 ){
+                    dialog.content('网站名不能为空！').time(1000);
+                    return false;
+                }
+                if( url.length < 1 ){
+                    dialog.content('链接地址不能为空！').time(1000);
+                    return false;
+                }
+                _post(this, dialog, function(data){
+                    if(data.status){
+                        dialog.content('保存成功！').lock().time(1000);
+                        setTimeout(function(){
+                            location.href = '/admin/links';
+                        }, 1500);
+                    }else{
+                        dialog.content('服务器忙，请稍候！').time(2000);
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+#end
+
+#include ("../layout.vm")

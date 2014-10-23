@@ -1,0 +1,64 @@
+#define(Options options, Blog blog)
+
+#tag block("meta")
+    <title>${blog.get('title')} - JFinal,博客</title>
+    #if(keyWords)
+        #set(keyWords = 'jfinal,开源博客')
+    #end
+    <meta name="Keywords" content="jfinal"/>
+    <meta name="Description" content="${description(blog.get('content').asString())}"/>
+#end
+
+#tag block("content")
+    #include ("common/_post.vm")
+    <aside class="sidebar c-4-12">
+        <div id="sidebars" class="g">
+            <div class="sidebar">
+                #include ("common/_sidebar.vm")
+            </div>
+        </div>
+    </aside>
+#end
+
+#tag block("script")
+    <script type="text/javascript">
+        // duoshuo config
+        var duoshuoQuery = {short_name:"${options.get('duoshuo_domain')}"};
+        // wumii config
+        var wumiiPermaLink = "${options.get('site_url')}/blog/${blog.get('id')}"; //请用代码生成文章永久的链接
+        var wumiiTitle = "${blog.get('title')}"; //请用代码生成文章标题
+        var wumiiTags = "jfinal, nodejs, coffee-script, java, mysql, linux"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+        var wumiiSitePrefix = "${options.get('site_url')}";
+        var wumiiParams = "&num=5&mode=2&pf=Jnode";
+        // baidu share bg
+        window._bd_share_config = {
+		    "common": {
+		        "bdSnsKey": {},
+		        "bdText": "",
+		        "bdMini": "2",
+		        "bdMiniList": ["mshare", "qzone", "tsina", "bdysc", "weixin", "renren", "tqq", "bdxc", "tqf", "tieba", "bdhome", "sqq", "ibaidu", "hi", "baidu", "copy"],
+		        "bdPic": "",
+		        "bdStyle": "0",
+		        "bdSize": "16"
+		    },
+		    "slide": {
+		        "type": "slide",
+		        "bdImg": "0",
+		        "bdPos": "right",
+		        "bdTop": "103.5"
+		    }
+		};
+		with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~ ( - new Date() / 36e5)];
+
+        // baidu share end
+        js.push("http://static.duoshuo.com/embed.js");
+        js.push("http://widget.wumii.com/ext/relatedItemsWidget");
+        js.push("${options.get('cdn_path')}/SyntaxHighlighter/scripts/shCore.js")
+        js.push("${options.get('cdn_path')}/SyntaxHighlighter/scripts/shAutoloader.js")
+        js.push("${options.get('cdn_path')}/js/blog.js?v=#{options.site_version}")
+        js.push("http://bdimg.share.baidu.com/static/api/js/share.js?v=310598.js?cdnversion=" + ~(-new Date() / 36e5));
+        LazyLoad.css("${options.get('cdn_path')}/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css");
+    </script>
+#end
+
+#include ("layout.vm")
