@@ -11,13 +11,13 @@ domain = .ikkong.com
 ## watermark, wechat use
 domain.name = www.ikkong.com
 
-## https://portal.qiniu.com/signup?code=3lhz6lzh2821d
+## 
 gravatar.url = 
 
-## qiniu bcs [url]https://portal.qiniu.com/signup?code=3lhz6lzh2821d
-qiniu.bucket = dreamlu
-qiniu.access.key = 
-qiniu.secret.key = 
+## qiniu bcs 
+qiniu.bucket = ikkong
+qiniu.access.key = JlNYeB4GUMEOmdVUwAD3Rn9Aa87RNM2-cpbFsU4I
+qiniu.secret.key = Y7NJAlM2lmcu_gHRmM2_4865yjaVeYb97987sIY3
 
 # mail config
 mail.smtp.host = smtp.ym.163.com

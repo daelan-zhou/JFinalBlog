@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>出错啦 - JFinal,nodejs博客dreamlu.net</title>
+<title>出错啦 - ikkong博客</title>
 <meta content="5; url=${BASE_PATH }" http-equiv="refresh">
 <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-<meta content="dreamlu,jfinal,bae,开源博客" name="Keywords">
-<meta content="dreamlu.net是一个使用Java开发，采用Jfinal mvc框架，MySQL数据库和Jade模版引擎，搭建于百度云BAE的开源博客系统。"name="Description">
+<meta content="jfinal,开源博客" name="Keywords">
+<meta content=""name="Description">
 <link rel="stylesheet" type="text/css" href="${BASE_PATH }css/error.css">
 </head>
 <body>

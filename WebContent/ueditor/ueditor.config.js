@@ -8,7 +8,7 @@
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
-    var qiniuPath = "http://file.dreamlu.net/";
+    var qiniuPath = "http://ikkong.qiniudn.com/";
     window.UEDITOR_CONFIG = {
         //为编辑器实例添加一个路径，这个不能被注释
         UEDITOR_HOME_URL : URL

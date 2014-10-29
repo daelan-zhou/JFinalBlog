@@ -1,6 +1,7 @@
 package net.dreamlu.utils;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -58,4 +59,13 @@ public class DateUtil {
     public static Date hourBefor(int hour){
     	return DateUtils.addHours(new Date(), -hour);
     }
+    
+    /**
+     * today for example : 2014-10-28
+     */
+    public static String getToday() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(new Date());
+		return date;
+	}
 }

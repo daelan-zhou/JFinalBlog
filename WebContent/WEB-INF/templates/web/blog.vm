@@ -3,7 +3,7 @@
 #tag block("meta")
     <title>${blog.get('title')} - JFinal,博客</title>
     #if(keyWords)
-        #set(keyWords = 'jfinal,开源博客')
+        #set(keyWords = 'ikkong,jfinal博客')
     #end
     <meta name="Keywords" content="jfinal"/>
     <meta name="Description" content="${description(blog.get('content').asString())}"/>
