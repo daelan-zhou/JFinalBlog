@@ -6,7 +6,7 @@ db.password = 1234
 isdev = true
 
 ## cookie
-secret = aa78c11d2a05698387dbeea4dd55fd9f
+secret = 
 domain = .ikkong.com
 ## watermark, wechat use
 domain.name = www.ikkong.com
@@ -16,8 +16,8 @@ gravatar.url =
 
 ## qiniu bcs 
 qiniu.bucket = ikkong
-qiniu.access.key = JlNYeB4GUMEOmdVUwAD3Rn9Aa87RNM2-cpbFsU4I
-qiniu.secret.key = Y7NJAlM2lmcu_gHRmM2_4865yjaVeYb97987sIY3
+qiniu.access.key = 
+qiniu.secret.key = 
 
 # mail config
 mail.smtp.host = smtp.ym.163.com
@@ -25,7 +25,7 @@ mail.smtp.auth = true
 mail.smtp.port = 25
 mail.stmp.debug = false
 mail.stmp.timeout = 2000
-mail.stmp.username = no-reply@dreamlu.net
+mail.stmp.username = 
 mail.stmp.pwd = 
 mail.stmp.title = 
 
